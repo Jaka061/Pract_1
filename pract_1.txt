@@ -1,0 +1,42 @@
+create table route (
+id serial primary key ,
+start_A varchar (50)not null,
+end_B varchar (50)not null
+);
+create table bus (
+id serial primary key ,
+b_number integer not null ,
+bus_route integer references route(id)
+);
+create table driver (
+id serial primary key ,
+name varchar (50) not null,
+bus_number integer references bus(id) not null
+);
+ create table journal (
+ id serial primary key ,
+ driver_id integer references driver(id) not null,
+ bus_id integer references bus(id) not null,
+ chek_out timestamp not null
+ ); 
+insert into route (start_A,end_B )values ('punct _A','punct_B');
+insert into route (start_A,end_B )values ('punct _C','punct_D');
+insert into route (start_A,end_B )values ('punct _E','punct_O');
+insert into route (start_A,end_B )values ('punct _A','punct_W');
+
+insert into bus (b_number ,bus_route )values (152,4);
+insert into bus (b_number ,bus_route )values (131,2);
+insert into bus (b_number ,bus_route )values (225,1);
+insert into bus (b_number ,bus_route )values (117,3);
+
+insert into driver (name,bus_number )values('Ivanov',1);
+insert into driver (name,bus_number )values('Petrov',3);
+insert into driver (name,bus_number )values('Vasiliy',4);
+insert into driver (name,bus_number )values('Sergey',2);
+insert into driver (name,bus_number )values('Ivanov',2);
+
+insert into journal (driver_id ,bus_id ,chek_out )values (1,1,'2020-02-23 12:00:45');
+insert into journal (driver_id ,bus_id ,chek_out )values (2,3,'2020-01-13 10:50:05');
+insert into journal (driver_id ,bus_id ,chek_out )values (3,4,'2020-02-23 21:43:15');
+insert into journal (driver_id ,bus_id ,chek_out )values (5,2,'2029-11-29 17:36:23');
+
